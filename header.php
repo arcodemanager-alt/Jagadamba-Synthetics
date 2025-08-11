@@ -28,6 +28,7 @@
                     <li><a href="product-listing-1.php">Products</a></li>
                     <li><a href="about.php">About</a></li>
                     <li><a href="contact.php">Contact</a></li>
+                    <li><a href="gallery.php">Gallery</a></li>
                 </ul>
                 
                 <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
@@ -40,3 +41,4 @@
     
     <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobile-overlay"></div>
+

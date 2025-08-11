@@ -309,6 +309,71 @@
     });
 </script>
 
+<script>
+    const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxVideo = document.getElementById("lightbox-video");
+const caption = document.getElementById("lightbox-caption");
+const closeBtn = document.querySelector(".lightbox .close");
+const prevBtn = document.querySelector(".lightbox .prev");
+const nextBtn = document.querySelector(".lightbox .next");
+
+let currentIndex = 0;
+const items = Array.from(document.querySelectorAll(".gallery-item"));
+
+function showItem(index) {
+  const item = items[index];
+  const type = item.dataset.type;
+  caption.textContent = item.dataset.caption || "";
+
+  if (type === "image") {
+    lightboxImg.src = item.querySelector("img").src;
+    lightboxImg.style.display = "block";
+    lightboxVideo.style.display = "none";
+  } else {
+    lightboxVideo.src = item.dataset.src;
+    lightboxVideo.style.display = "block";
+    lightboxImg.style.display = "none";
+    lightboxVideo.play();
+  }
+}
+
+items.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    currentIndex = index;
+    lightbox.classList.remove("hidden");
+    showItem(currentIndex);
+  });
+});
+
+prevBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex - 1 + items.length) % items.length;
+  showItem(currentIndex);
+});
+
+nextBtn.addEventListener("click", () => {
+  currentIndex = (currentIndex + 1) % items.length;
+  showItem(currentIndex);
+});
+
+// Close when clicking X
+closeBtn.addEventListener("click", () => {
+  lightbox.classList.add("hidden");
+  lightboxVideo.pause();
+  lightboxVideo.currentTime = 0;
+});
+
+// Close when clicking outside content
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) {
+    lightbox.classList.add("hidden");
+    lightboxVideo.pause();
+    lightboxVideo.currentTime = 0;
+  }
+});
+
+</script>
 
 </body>
+
 </html>
